@@ -1,6 +1,8 @@
 export default function VideoCard({ data }) {
   const { title, duration, thumbnail, audioUrl } = data;
 
+  const API_URL = import.meta.env.VITE_API_URL || "https://fetch-beat.onrender.com";
+
   const formatDuration = (secs) => {
     if (!secs) return "Unknown";
     const h = Math.floor(secs / 3600);
@@ -13,7 +15,7 @@ export default function VideoCard({ data }) {
   };
 
   const downloadUrl = audioUrl
-    ? "https://fetch-beat.onrender.com/api/proxy-download?audioUrl=" +
+    ? API_URL + "/api/proxy-download?audioUrl=" +
       encodeURIComponent(audioUrl) +
       "&title=" +
       encodeURIComponent(title || "audio")
@@ -21,7 +23,6 @@ export default function VideoCard({ data }) {
 
   return (
     <div style={styles.card}>
-      {/* Thumbnail */}
       {thumbnail && (
         <div style={styles.thumbWrap}>
           <img src={thumbnail} alt={title} style={styles.thumb} />
@@ -31,10 +32,8 @@ export default function VideoCard({ data }) {
       )}
 
       <div style={styles.body}>
-        {/* Title */}
         <h2 style={styles.title}>{title || "Unknown Title"}</h2>
 
-        {/* Tags row */}
         <div style={styles.tagsRow}>
           <span style={styles.tag}>
             <span style={styles.tagDot} />
@@ -46,15 +45,10 @@ export default function VideoCard({ data }) {
           </span>
         </div>
 
-        {/* Audio preview */}
         {audioUrl ? (
           <div style={styles.previewBox}>
             <p style={styles.previewLabel}>Preview</p>
-            <audio
-              controls
-              src={audioUrl}
-              style={styles.audio}
-            />
+            <audio controls src={audioUrl} style={styles.audio} />
           </div>
         ) : (
           <div style={styles.noAudio}>
@@ -62,12 +56,8 @@ export default function VideoCard({ data }) {
           </div>
         )}
 
-        {/* Download button */}
         {downloadUrl && (
-          <a
-            href={downloadUrl}
-            style={styles.downloadBtn}
-          >
+          <a href={downloadUrl} style={styles.downloadBtn}>
             <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" style={{ marginRight: "8px" }}>
               <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
               <polyline points="7 10 12 15 17 10" />
