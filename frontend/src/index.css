@@ -1,0 +1,31 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: "Inter", sans-serif;
+  background: #0a0a0f;
+  color: #ffffff;
+  min-height: 100vh;
+}
+
+::-webkit-scrollbar {
+  width: 6px;
+}
+::-webkit-scrollbar-track {
+  background: #1a1a2e;
+}
+::-webkit-scrollbar-thumb {
+  background: #ff3e3e;
+  border-radius: 3px;
+}
+
+audio::-webkit-media-controls-panel {
+  background-color: #1e1e2e;
+}
+audio::-webkit-media-controls-play-button {
+  background-color: #ff3e3e;
+  border-radius: 50%;
+}
