@@ -1,8 +1,6 @@
 export default function VideoCard({ data }) {
   const { title, duration, thumbnail, audioUrl } = data;
 
-  const API_URL = import.meta.env.VITE_API_URL || "https://fetch-beat.onrender.com";
-
   const formatDuration = (secs) => {
     if (!secs) return "Unknown";
     const h = Math.floor(secs / 3600);
@@ -14,12 +12,7 @@ export default function VideoCard({ data }) {
     return m + ":" + s.toString().padStart(2, "0");
   };
 
-  const downloadUrl = audioUrl
-    ? API_URL + "/api/proxy-download?audioUrl=" +
-      encodeURIComponent(audioUrl) +
-      "&title=" +
-      encodeURIComponent(title || "audio")
-    : null;
+  const downloadUrl = audioUrl || null;
 
   return (
     <div style={styles.card}>
@@ -57,7 +50,12 @@ export default function VideoCard({ data }) {
         )}
 
         {downloadUrl && (
-          <a href={downloadUrl} style={styles.downloadBtn}>
+          <a
+            href={downloadUrl}
+            target="_blank"
+            rel="noreferrer"
+            style={styles.downloadBtn}
+          >
             <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" style={{ marginRight: "8px" }}>
               <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
               <polyline points="7 10 12 15 17 10" />
