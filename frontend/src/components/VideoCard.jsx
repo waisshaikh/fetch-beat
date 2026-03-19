@@ -13,7 +13,7 @@ export default function VideoCard({ data }) {
   };
 
   const downloadUrl = audioUrl
-    ? "http://localhost:5000/api/proxy-download?audioUrl=" +
+    ? "https://fetch-beat.onrender.com/api/proxy-download?audioUrl=" +
       encodeURIComponent(audioUrl) +
       "&title=" +
       encodeURIComponent(title || "audio")
